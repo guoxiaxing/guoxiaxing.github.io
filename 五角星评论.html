@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<!-- 基本样式 -->
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		ul{
+			list-style: none;
+			font-size: 40px;
+			color:orange;
+		}
+		.comment li{
+			float:left;
+		}
+	</style>
+	<!-- 引入jquery包 -->
+	<script src="jquery.min.js"></script>
+</head>
+<body>
+	<!-- 五角星样式 -->
+	<ul class="comment">
+		<li>☆</li>
+		<li>☆</li>
+		<li>☆</li>
+		<li>☆</li>
+		<li>☆</li>
+	</ul>
+
+	<script>
+	$(function(){
+		var wjx_sol = "★",
+		 	wjx_hol = "☆";
+		//第一步：实现鼠标移入到哪个五角星让其和自己前面的所有五角星变为实心后面的变为空心
+		$(".comment").on("mouseenter","li",function(){
+			$(this).text(wjx_sol).prevAll().text(wjx_sol).end().nextAll().text(wjx_hol);
+			//第二步：标记点击的那个五角星(添加一个类名来标记)
+		}).on("click","li",function(){
+			$(this).addClass("clicked").siblings().removeClass("clicked");
+			//第三步：当鼠标离开控件时让标记的五角星和其之前的五角星变为实心后面的为空心
+		}).on("mouseleave",function(){
+			$(".comment li").text(wjx_hol);
+			$(".clicked").text(wjx_sol).prevAll().text(wjx_sol).end().nextAll().text(wjx_hol);
+		});
+	});
+	</script>
+	
+</body>
+</html>
